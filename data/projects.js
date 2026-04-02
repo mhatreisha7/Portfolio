@@ -2,8 +2,8 @@ const projectsData = [
   {
     id: "attendance-tracker",
     title: "Attendance Tracker",
-    shortDesc: "Developed a system using OpenCV and deep learning to automate attendance, achieving a 90% error reduction.",
-    image: "https://images.unsplash.com/photo-1596526131083-e8c762266d33?w=600&q=80",
+    shortDesc: "Facial recognition-based attendance system using OpenCV and deep learning, achieving 90% error reduction.",
+    image: "images/attendance.png",
     tech: ["OpenCV", "Deep Learning", "Python"],
     github: "https://github.com/mhatreisha7/Face-Recognition-project-",
     demo: null,
@@ -20,17 +20,17 @@ const projectsData = [
   {
     id: "multi-disease-detection",
     title: "Multi-Disease Detection",
-    shortDesc: "Ongoing AI/ML project focused on detecting multiple diseases from medical data to assist in early diagnosis.",
-    image: "https://images.unsplash.com/photo-1530213786072-9d235073d034?w=600&q=80",
+    shortDesc: "AI/ML system to detect brain disorders, lung conditions, and cancer — enabling remote health monitoring.",
+    image: "images/multidisease.png",
     tech: ["AI", "Machine Learning", "Python"],
     github: "https://github.com/mhatreisha7",
     demo: null,
     date: "Ongoing",
     details: {
-      overview: "This project involves developing an AI/ML model capable of identifying various diseases from patient data for preliminary diagnosis.",
+      overview: "An AI/ML model capable of identifying various diseases from patient data for preliminary diagnosis and remote monitoring.",
       highlights: [
-        "Utilizing advanced ML algorithms for pattern recognition in medical datasets.",
-        "Focus on early detection and improved diagnostic accuracy.",
+        "Detecting brain disorders, lung conditions, and cancer using AI/ML.",
+        "Enables users to monitor health conditions remotely.",
         "Continuous model refinement with new data integration."
       ],
     },
@@ -38,8 +38,8 @@ const projectsData = [
   {
     id: "car-rental-app",
     title: "Car Rental App",
-    shortDesc: "Comprehensive car rental application using Java MVC architecture with booking, authentication, and fare calculation.",
-    image: "https://images.unsplash.com/photo-1517672651780-6ae37a178257?w=600&q=80",
+    shortDesc: "Full-stack Java MVC car rental application with booking management, fare calculation, and authentication.",
+    image: "images/car-rental.png",
     tech: ["Java MVC", "JDBC", "SQL", "Servlets", "JSP"],
     github: "https://github.com/mhatreisha7/Car-Rental-System",
     demo: null,
@@ -56,8 +56,8 @@ const projectsData = [
   {
     id: "personal-finance-system",
     title: "Personal Finance System",
-    shortDesc: "Web-based application for tracking income, expenses, and budgeting to promote better financial management.",
-    image: "https://images.unsplash.com/photo-1579621970563-cdcf76ed2273?w=600&q=80",
+    shortDesc: "Web-based finance tracker with income/expense categorization, budgeting, and spending reports.",
+    image: "images/personal-finance.png",
     tech: ["Java", "HTML", "CSS", "JavaScript", "SQL"],
     github: "https://github.com/mhatreisha7/Personal-Finance-Management-System",
     demo: null,
@@ -65,8 +65,8 @@ const projectsData = [
     details: {
       overview: "Provides users with tools to monitor financial activities, set budgets, and gain insights into spending habits.",
       highlights: [
-        "Features include tracking, categorization, and financial reporting.",
-        "User-friendly interface for easy data entry and visualization.",
+        "Features income tracking, categorization, and financial reporting.",
+        "User-friendly dashboard with charts and visualizations.",
         "Secure storage of financial data with SQL integration."
       ],
     },

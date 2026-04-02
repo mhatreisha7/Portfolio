@@ -25,12 +25,15 @@
           </div>
 
           <h1 class="hero-heading">
+            <span class="hero-greeting">Hey, I'm</span>
             <span class="hero-name-first">${firstName}</span>
             <em class="hero-name-last">${lastName}.</em>
           </h1>
 
           <div class="hero-role-line">
-            <span class="hero-role-badge">${heroData.title}</span>
+            <span class="hero-role-badge">
+              <span class="hero-role-typing" id="hero-role-typing"></span><span class="hero-role-cursor">|</span>
+            </span>
           </div>
 
           <p class="hero-tagline">${heroData.tagline}</p>
@@ -53,7 +56,7 @@
           <div class="hero-photo-wrap">
             <div class="hero-photo-frame">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=85"
+                src="images/profile.jpg"
                 alt="Isha Mhatre"
               />
             </div>
@@ -145,5 +148,21 @@
     }, { passive: true });
   }
 
-  document.addEventListener("DOMContentLoaded", render);
+
+  function startTypingAnimation() {
+    const el = document.getElementById("hero-role-typing");
+    if (!el) return;
+    const text = heroData.title;
+    let i = 0;
+    el.textContent = "";
+    function type() {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        setTimeout(type, 80);
+      }
+    }
+    setTimeout(type, 600);
+  }
+
+  document.addEventListener("DOMContentLoaded", function() { render(); setTimeout(startTypingAnimation, 100); });
 })();

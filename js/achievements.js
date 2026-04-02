@@ -1,4 +1,4 @@
-// js/achievements.js — Achievement cards + Leadership sidebar
+// js/achievements.js — Achievement cards + Leadership below
 (function () {
 
   const BADGE_ICON = {
@@ -50,25 +50,20 @@
 
     section.innerHTML = `
       <div class="section-wrap">
-        <span class="section-label">Recognition & Leadership</span>
+        <span class="section-label">Recognition & Certifications</span>
         <h2 class="section-heading">Achievements</h2>
-        <div class="ach-layout">
-          <div class="ach-grid">
-            ${achievements.map(buildAchCard).join("")}
-          </div>
-          ${activities.length ? `
-          <aside class="ach-sidebar">
-            <div class="ach-sidebar-card">
-              <h3 class="ach-sidebar-title">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                Leadership
-              </h3>
-              <div class="act-list">
-                ${activities.map(buildActivityItem).join("")}
-              </div>
-            </div>
-          </aside>` : ""}
+        <div class="ach-grid ach-grid-full">
+          ${achievements.map(buildAchCard).join("")}
         </div>
+
+        ${activities.length ? `
+        <div class="leadership-block">
+          <span class="section-label" style="margin-top:0">Extracurricular</span>
+          <h2 class="section-heading" style="margin-bottom:1.5rem">Leadership</h2>
+          <div class="act-grid">
+            ${activities.map(buildActivityItem).join("")}
+          </div>
+        </div>` : ""}
       </div>`;
 
     setupReveal();

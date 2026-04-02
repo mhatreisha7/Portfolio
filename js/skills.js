@@ -1,85 +1,35 @@
 (function () {
 
-  const CATEGORIES = [
-    { key: "languages",       label: "Languages",        icon: "⌨️" },
-    { key: "frameworks",      label: "Frameworks",       icon: "⚙️" },
-    { key: "webTechnologies", label: "Web Tech",         icon: "🌐" },
-    { key: "concepts",        label: "Concepts",         icon: "💡" },
-    { key: "tools",           label: "Tools",            icon: "🛠️" },
-  ];
-
-  const LEVEL_COLOR = {
-    "Advanced":     "var(--accent)",
-    "Intermediate": "var(--secondary)",
-    "Beginner":     "var(--text-dim)",
+  // Category card icons (SVG)
+  const CAT_ICONS = {
+    languages:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    frameworks:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>`,
+    webTechnologies: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    concepts:        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+    tools:           `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
   };
 
-  function buildSkillBar(skill) {
-    const color = LEVEL_COLOR[skill.level] || "var(--accent)";
-    return `
-      <div class="sk-bar-item">
-        <div class="sk-bar-header">
-          <div class="sk-bar-name-wrap">
-            <span class="sk-bar-name">${skill.name}</span>
-            ${skill.sublabel ? `<span class="sk-bar-sub">${skill.sublabel}</span>` : ""}
-          </div>
-          <span class="sk-level-badge sk-level-${skill.level.toLowerCase()}">${skill.level}</span>
-        </div>
-        <div class="sk-track" role="progressbar" aria-valuenow="${skill.pct}" aria-valuemin="0" aria-valuemax="100">
-          <div class="sk-fill" style="--target-w:${skill.pct}%; background:${color}" data-pct="${skill.pct}"></div>
-        </div>
-      </div>
-    `;
-  }
+  const CATEGORIES = [
+    { key: "languages",       label: "Languages" },
+    { key: "frameworks",      label: "Frameworks" },
+    { key: "webTechnologies", label: "Web Tech" },
+    { key: "concepts",        label: "Concepts" },
+    { key: "tools",           label: "Tools" },
+  ];
 
-  function buildTabPanel(cat) {
+  function buildCategoryCard(cat) {
     const skills = skillsData[cat.key] || [];
     if (!skills.length) return "";
+    const icon = CAT_ICONS[cat.key] || CAT_ICONS.tools;
+    const chips = skills.map(s => `<span class="sk-chip">${s.name}</span>`).join("");
     return `
-      <div class="sk-panel" id="sk-panel-${cat.key}" role="tabpanel" aria-labelledby="sk-tab-${cat.key}" hidden>
-        <div class="sk-bars">
-          ${skills.map(buildSkillBar).join("")}
+      <div class="sk-cat-card sk-reveal">
+        <div class="sk-cat-header">
+          <div class="sk-cat-icon">${icon}</div>
+          <span class="sk-cat-label">${cat.label}</span>
         </div>
-      </div>
-    `;
-  }
-
-  function buildTabButton(cat, isFirst) {
-    return `
-      <button class="sk-tab${isFirst ? " active" : ""}"
-              id="sk-tab-${cat.key}"
-              role="tab"
-              aria-selected="${isFirst}"
-              aria-controls="sk-panel-${cat.key}"
-              data-key="${cat.key}">
-        <span class="sk-tab-icon">${cat.icon}</span>
-        <span class="sk-tab-label">${cat.label}</span>
-      </button>
-    `;
-  }
-
-  function animateBars(panel) {
-    panel.querySelectorAll(".sk-fill").forEach((el, i) => {
-      const target = el.dataset.pct + "%";
-      el.style.width = "0%";
-      setTimeout(() => {
-        el.style.transition = `width 0.7s cubic-bezier(0.19,1,0.22,1) ${i * 80}ms`;
-        el.style.width = target;
-      }, 60);
-    });
-  }
-
-  function switchTab(tabsEl, key) {
-    tabsEl.querySelectorAll(".sk-tab").forEach(t => {
-      const active = t.dataset.key === key;
-      t.classList.toggle("active", active);
-      t.setAttribute("aria-selected", active);
-    });
-    tabsEl.closest(".skills-inner").querySelectorAll(".sk-panel").forEach(p => {
-      const show = p.id === `sk-panel-${key}`;
-      p.hidden = !show;
-      if (show) animateBars(p);
-    });
+        <div class="sk-chips">${chips}</div>
+      </div>`;
   }
 
   function init() {
@@ -92,46 +42,23 @@
       <div class="section-wrap">
         <span class="section-label">My Expertise</span>
         <h2 class="section-heading">Skills</h2>
-        <div class="skills-inner">
-          <div class="sk-tabs" role="tablist" aria-label="Skill categories">
-            ${validCats.map((c, i) => buildTabButton(c, i === 0)).join("")}
-          </div>
-          <div class="sk-panels">
-            ${validCats.map((c, i) => buildTabPanel(c, i === 0)).join("")}
-          </div>
+        <div class="sk-cat-grid">
+          ${validCats.map(buildCategoryCard).join("")}
         </div>
       </div>
     `;
 
-    // Show first panel
-    const firstPanel = section.querySelector(".sk-panel");
-    if (firstPanel) firstPanel.hidden = false;
-
-    // Tab clicks
-    section.querySelector(".sk-tabs").addEventListener("click", e => {
-      const btn = e.target.closest(".sk-tab");
-      if (btn) switchTab(section.querySelector(".sk-tabs"), btn.dataset.key);
-    });
-
-    // Keyboard navigation
-    section.querySelector(".sk-tabs").addEventListener("keydown", e => {
-      const tabs = [...section.querySelectorAll(".sk-tab")];
-      const idx  = tabs.indexOf(document.activeElement);
-      if (e.key === "ArrowRight" && idx < tabs.length - 1) { tabs[idx + 1].focus(); tabs[idx + 1].click(); }
-      if (e.key === "ArrowLeft"  && idx > 0)               { tabs[idx - 1].focus(); tabs[idx - 1].click(); }
-    });
-
-    // IntersectionObserver — animate bars when section scrolls into view
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    // Reveal on scroll
+    const els = section.querySelectorAll(".sk-reveal");
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          const activePanel = section.querySelector(".sk-panel:not([hidden])");
-          if (activePanel) animateBars(activePanel);
-          observer.disconnect();
+          setTimeout(() => entry.target.classList.add("is-visible"), i * 80);
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
-    observer.observe(section);
+    }, { threshold: 0.08 });
+    els.forEach(el => obs.observe(el));
   }
 
   document.addEventListener("DOMContentLoaded", init);

@@ -500,3 +500,58 @@ body.light .hero-photo-frame {
     font-size: clamp(3rem, 14vw, 4rem);
   }
 }
+
+/* ── "Hey, I'm" greeting ── */
+.hero-greeting {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+  opacity: 0;
+  animation: heroReveal 0.7s var(--ease-out-expo) 0.1s forwards;
+}
+
+/* ── Typing animation cursor ── */
+.hero-role-cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 300;
+  animation: blink 1s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Skills section card layout ── */
+.skills-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.skill-chip:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--border-accent);
+}

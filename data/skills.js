@@ -26,7 +26,6 @@ const skillsData = {
   ],
   tools: [
     { name: "Git & GitHub", sublabel: "Version control", level: "Intermediate", pct: 75 },
-    { name: "IntelliJ IDEA", sublabel: "Java IDE", level: "Intermediate", pct: 75 },
     { name: "VS Code", sublabel: "Web development", level: "Advanced", pct: 80 },
     { name: "AWS Cloud", sublabel: "Cloud Foundations", level: "Beginner", pct: 40 }
   ]

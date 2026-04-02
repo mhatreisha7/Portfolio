@@ -279,3 +279,39 @@ body.light .ach-card {
   line-height: 1.55;
   margin-top: 0.2rem;
 }
+/* ── Full-width grid (no sidebar) ── */
+.ach-grid-full {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  margin-top: 2rem;
+}
+
+/* ── Leadership block below achievements ── */
+.leadership-block {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.act-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.act-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.act-item:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
